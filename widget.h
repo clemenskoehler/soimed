@@ -22,6 +22,15 @@ private:
 
 private slots:
     void MalePixel();
+    void MaleLinieH();
+    void MaleLinieV();
+    void MaleKreuz();
+    void MaleSchraeg();
+    void FillRot();
+    void MaleQuadrat();
+    void MaleFarbverlauf();
+    void MaleKreis();
+    void MaleSmiley();
 };
 
 

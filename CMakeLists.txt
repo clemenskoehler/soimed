@@ -11,6 +11,7 @@ qt_add_executable(Soimed
     widget.cpp
     widget.h
     widget.ui
+
 )
 
 target_link_libraries(Soimed

@@ -35,18 +35,91 @@
     <string>TextLabel</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_Pixel">
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>620</x>
-     <y>540</y>
-     <width>100</width>
-     <height>32</height>
+     <x>610</x>
+     <y>50</y>
+     <width>139</width>
+     <height>347</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Pixel</string>
-   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QPushButton" name="pushButton_pixel">
+        <property name="text">
+         <string>Pixel</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_lineH">
+        <property name="text">
+         <string>Linie horizontal</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_lineV">
+        <property name="text">
+         <string>Linie vertikal</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_cross">
+        <property name="text">
+         <string>Kreuz</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_linefunction">
+        <property name="text">
+         <string>y=2*x</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_fillRed">
+        <property name="text">
+         <string>ROT</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_squareRim">
+        <property name="text">
+         <string>Quadrat mit Rand</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_farbverlauf">
+        <property name="text">
+         <string>Farbverlauf</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_kreis">
+        <property name="text">
+         <string>Kreis</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_smiley">
+        <property name="text">
+         <string>Smiley</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>
