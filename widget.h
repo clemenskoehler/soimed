@@ -19,9 +19,14 @@ public:
 
 private:
     Ui::Widget *ui;
+    QImage* image;
+    short* m_pImageData;
+    int windowing(int HU_value, int cneter, int width);
+
 
 private slots:
-    void LoadFile();
+    void load8BitFile();
+    void load12BitFile();
 };
 
 
