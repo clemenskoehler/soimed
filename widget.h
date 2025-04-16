@@ -21,12 +21,18 @@ private:
     Ui::Widget *ui;
     QImage* image;
     short* m_pImageData;
-    int windowing(int HU_value, int cneter, int width);
+    int windowing(int HU_value, int center, int width);
+    void updateImage(char* imageData);
+    void updateImage(short* imageData);
+    int windowing_center;
+    int windowing_width;
 
 
 private slots:
     void load8BitFile();
     void load12BitFile();
+    void onCenterSliderValueChanged(int value);
+    void onWidthSliderValueChanged(int value);
 };
 
 
