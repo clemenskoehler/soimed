@@ -35,18 +35,31 @@
     <string>TextLabel</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_openFile">
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
      <x>620</x>
-     <y>540</y>
-     <width>135</width>
-     <height>32</height>
+     <y>500</y>
+     <width>125</width>
+     <height>66</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Datei öffnen</string>
-   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QPushButton" name="pushButton_load8BitFile">
+      <property name="text">
+       <string>Load 8-Bit File</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton_load12BitFile">
+      <property name="text">
+       <string>Load 12-Bit File</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>
