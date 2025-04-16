@@ -35,91 +35,18 @@
     <string>TextLabel</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QPushButton" name="pushButton_openFile">
    <property name="geometry">
     <rect>
-     <x>610</x>
-     <y>50</y>
-     <width>139</width>
-     <height>347</height>
+     <x>620</x>
+     <y>540</y>
+     <width>135</width>
+     <height>32</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_2">
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QPushButton" name="pushButton_pixel">
-        <property name="text">
-         <string>Pixel</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_lineH">
-        <property name="text">
-         <string>Linie horizontal</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_lineV">
-        <property name="text">
-         <string>Linie vertikal</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_cross">
-        <property name="text">
-         <string>Kreuz</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_linefunction">
-        <property name="text">
-         <string>y=2*x</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_fillRed">
-        <property name="text">
-         <string>ROT</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_squareRim">
-        <property name="text">
-         <string>Quadrat mit Rand</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_farbverlauf">
-        <property name="text">
-         <string>Farbverlauf</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_kreis">
-        <property name="text">
-         <string>Kreis</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_smiley">
-        <property name="text">
-         <string>Smiley</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-   </layout>
+   <property name="text">
+    <string>Datei öffnen</string>
+   </property>
   </widget>
  </widget>
  <resources/>
