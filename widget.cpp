@@ -4,6 +4,7 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QSignalBlocker>
 
 // // Erzeuge ein Objekt vom Typ QImage
 // QImage image(512,512, QImage::Format_RGB32);
@@ -19,8 +20,10 @@ Widget::Widget(QWidget *parent)
     connect(ui->pushButton_load12BitFile, SIGNAL(clicked()), this, SLOT(load12BitFile()));
 
 
-    connect(ui->horizontalSlider_center, &QSlider::valueChanged, this, &Widget::onCenterSliderValueChanged);
-    connect(ui->horizontalSlider_width, &QSlider::valueChanged, this, &Widget::onWidthSliderValueChanged);
+    connect(ui->center_horizontalSlider, &QSlider::valueChanged, this, &Widget::onCenterValueChanged);
+    connect(ui->center_spinBox, &QSpinBox::valueChanged, this, &Widget::onCenterValueChanged);
+    connect(ui->width_dial, &QDial::valueChanged, this, &Widget::onWidthValueChanged);
+    connect(ui->width_spinBox, &QSpinBox::valueChanged, this, &Widget::onWidthValueChanged);
 
 
     // Speicher der Größe 512*512 reservieren
@@ -34,8 +37,8 @@ Widget::Widget(QWidget *parent)
     ui->label_image->setPixmap(QPixmap::fromImage(*image));
     repaint();
 
-    ui->horizontalSlider_center->setValue(windowing_center);
-    ui->horizontalSlider_width->setValue(windowing_width);
+    ui->center_horizontalSlider->setValue(windowing_center);
+    ui->width_dial->setValue(windowing_width);
 
 }
 
@@ -60,11 +63,11 @@ void Widget::load8BitFile()
     }
 
     int iFileSize = dataFile.size();
-    if (iFileSize > sizeof(imageData)) {
-        QMessageBox::warning(this, "Warning", "File is too large and cannot be loaded.");
-        dataFile.close();
-        return;
-    }
+    // if (iFileSize > sizeof(imageData)) {
+    //     QMessageBox::warning(this, "Warning", "File is too large and cannot be loaded.");
+    //     dataFile.close();
+    //     return;
+    // }
 
     int iNumberBytesRead = dataFile.read(imageData, sizeof(imageData));
     if (iNumberBytesRead < 0) {
@@ -81,8 +84,6 @@ void Widget::load8BitFile()
 
 void Widget::load12BitFile()
 {
-    short imageData[512 * 512];
-
     // Open file dialog
     QString imagePath = QFileDialog::getOpenFileName(this, "Open Image", "./", "Raw Image Files (*.raw)");
 
@@ -93,13 +94,13 @@ void Widget::load12BitFile()
     }
 
     int iFileSize = dataFile.size();
-    if (iFileSize > sizeof(imageData)) {
+    if (iFileSize > 512*512*sizeof(short)) {
         QMessageBox::warning(this, "Warning", "File is too large and cannot be loaded.");
         dataFile.close();
         return;
     }
 
-    int iNumberBytesRead = dataFile.read((char*)imageData, sizeof(imageData) * sizeof(short));
+    int iNumberBytesRead = dataFile.read((char*)m_pImageData, 512 * 512 * sizeof(short));
     if (iNumberBytesRead < 0) {
         QMessageBox::critical(this, "Error", "Error reading the file");
         dataFile.close();
@@ -109,7 +110,8 @@ void Widget::load12BitFile()
     dataFile.close();
 
     // Update the image with the windowing function (which now uses class variables center and width)
-    updateImage(imageData);
+    // updateImage(m_pImageData);
+    updateImage(m_pImageData);
 }
 
 void Widget::updateImage(char* imageData)
@@ -118,8 +120,8 @@ void Widget::updateImage(char* imageData)
     for (int y = 0; y < 512; ++y) {
         for (int x = 0; x < 512; ++x) {
             int index = y * 512 + x;
-            if(index < sizeof(imageData)) {
-                int grayValue = windowing(imageData[index], windowing_center, windowing_width);
+            if(index < 512*512) {
+                int grayValue = imageData[index];
                 image->setPixel(x, y, qRgb(grayValue, grayValue, grayValue));
             }
         }
@@ -137,7 +139,7 @@ void Widget::updateImage(short* imageData)
         for (int x = 0; x < 512; ++x) {
             int index = y * 512 + x;
 
-            if(index < sizeof(imageData)) {
+            if(index < 512*512) {
                 int grayValue = windowing(imageData[index], windowing_center, windowing_width);
                 image->setPixel(x, y, qRgb(grayValue, grayValue, grayValue));
             }
@@ -166,14 +168,37 @@ int Widget::windowing(int HU_value, int center, int width)
     return grayValue;
 }
 
-void Widget::onCenterSliderValueChanged(int value)
+void Widget::onCenterValueChanged(int value)
 {
-    windowing_center = value;
+    setWindowingCenter(value);
+
+    QSignalBlocker blockerSpinBox(ui->center_spinBox);
+    ui->center_spinBox->setValue(value);
+
+    QSignalBlocker blockerSlider(ui->center_horizontalSlider);
+    ui->center_horizontalSlider->setValue(value);
+
     updateImage(m_pImageData);  // Update the image with the new center value
 }
 
-void Widget::onWidthSliderValueChanged(int value)
+void Widget::onWidthValueChanged(int value)
 {
-    windowing_width = value;
+    setWindowingWidth(value);
+
+    QSignalBlocker blockerSpinBox(ui->width_spinBox);
+    ui->width_spinBox->setValue(value);
+
+    QSignalBlocker blockerSlider(ui->width_dial);
+    ui->width_dial->setValue(value);
+
     updateImage(m_pImageData);  // Update the image with the new width value
 }
+
+void Widget::setWindowingCenter(int value) {
+    windowing_center = value;
+}
+
+void Widget::setWindowingWidth(int value) {
+    windowing_width = value;
+}
+

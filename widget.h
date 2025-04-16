@@ -31,8 +31,10 @@ private:
 private slots:
     void load8BitFile();
     void load12BitFile();
-    void onCenterSliderValueChanged(int value);
-    void onWidthSliderValueChanged(int value);
+    void onCenterValueChanged(int value);
+    void onWidthValueChanged(int value);
+    void setWindowingCenter(int value);
+    void setWindowingWidth(int value);
 };
 
 
